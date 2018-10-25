@@ -92,7 +92,12 @@ foreach ($diagram['cells'] as $cell) {
 }
 // Display image
 imagepng($im, 'voronoi.png');*/
-
+$tmp = new PointChunk(999999,999999,null,false);
+$arr[0]= $tmp;
+$np[0]=$tmp;
+echo $arr[0]->getId().":".$np[0]->getId()."<br>";
+unset($np[0]);
+echo $arr[0]->getId();
 ?>
 
 	</body>
