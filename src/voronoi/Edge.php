@@ -10,11 +10,11 @@ require_once("Point.php");
 
 class Edge
 {
-    private $A = null;
-    private $B = null;
-    private $length = 0;
-    private $coefficient = 0;
-    private $shift = 0;
+    public $A = null;
+    public $B = null;
+    public $length = 0;
+    public $coefficient = 0;
+    public $shift = 0;
     private $id = "";
 
     public function __construct($A, $B) {
@@ -95,10 +95,10 @@ class Edge
 
     public function perpendicular($midpoint){
         if($this->coefficient==0){
-            $this->coefficient = (($this->A->y-$this->B->y)==0)? - 1 : 0;
+            $this->coefficient = (($this->A->y-$this->B->y)==0)? null : 0;
             $this->shift =(($this->B->x - $this->A->x) == 0) ?$midpoint->y : $midpoint->x;
         }else{
-            $this->coefficient = (($this->A->y-$this->B->y)==0)? - 1 : - 1/$this->coefficient;
+            $this->coefficient = (($this->A->y-$this->B->y)==0)? null : - 1/$this->coefficient;
             $this->shift =(($this->A->y-$this->B->y)==0)? $midpoint->x : $midpoint->y - $this->coefficient*$midpoint->x;
         }
         //echo "A:".$this->A->y."B:".$this->B->y.$this->coefficient."<br>";
@@ -147,7 +147,7 @@ class Edge
 
     public function overlaps($edge1,$edge2){
         if($edge1->coefficient!=$edge2->coefficient){
-            if($edge2->getCoefficient()==-1)
+            if($edge2->getCoefficient()==null)
                 $newPoint =new Point($edge2->shift,$edge1->coefficient*$edge2->shift+$edge1->shift,null, false);
             else{
                 $newPoint =new Point(($edge1->shift-$edge2->shift)/($edge2->coefficient-$edge1->coefficient),($edge1->coefficient*(($edge1->shift-$edge2->shift)/($edge2->coefficient-$edge1->coefficient))+$edge1->shift),null, false);

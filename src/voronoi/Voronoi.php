@@ -37,7 +37,15 @@
             $A = new Point(999999,999999,null,false);$keyLA = 0;
             $B = new Point(999999,999999,null,false);$keyLB = 0;
             foreach ($point->edges as $k => $val) {
-                $tmp = Edge::overlaps($val, $line);
+                $tmp = Edge::overlaps($val, $line);/*
+                if($midpoint->getId()=="75-225"&&$k=="75-75|300-300"){
+
+                    echo  "<pre>";
+                    echo $line->coefficient."<br>";
+                    echo $line->shift."<br>";
+                    print_r($tmp);
+                    echo "</pre>";
+                }*/
                 //if ($tmp != null)echo "tmp!=null--".$tmp->getId()."<br>";
                 if ($tmp != null && $tmp->IsPointInsidePolygon($this->bbox['borders'])) {
                     //if(($point->getId()."|".$value->getId())=="150-0|450-0") {echo $val->getId()." :-: ".(Point::length($A, $midpoint).":".Point::length($tmp, $midpoint)."<br>");}
@@ -94,7 +102,16 @@
                     //echo "Point V:".$value->getId()."<br>";
                     $line = new Edge($point, $value);
                     $midpoint = PointChunk::midpoint($point,$value);
+
                     $line->perpendicular($midpoint);
+                    /*if($point->getId()=="0-150"){
+
+                        //echo  "<pre>";
+                        echo $line->coefficient."<br>";
+                        echo $line->shift."<br>";
+                        //print_r($tmp);
+                        echo "--------------------------------------<br>";
+                    }
                     /*echo "<pre>";
                         print_r($point);
                     echo "</pre>";*/
