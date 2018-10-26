@@ -111,7 +111,7 @@ class PointChunk
     public function closeEdge()
     {
         echo "<pre>";
-            //print_r($this->edges);
+            print_r($this->edges);
         echo "</pre>";
         $keybord = key($this->edges);
         $tmpborder = $this->edges[$keybord];
@@ -164,45 +164,41 @@ class PointChunk
                 echo "</pre>";
                 //echo ($tmpborder->checkParaler($Ledge))?"1":"0";
                 if ($tmpborder->checkParaler($Ledge)) {
-                    if($this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr)!=null) {
-                        $Ledge=$this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr);
-                        echo "L=A-a<br>";
-                    }elseif($this->addEdge($B,$A,$b,$keybord,$tmpborder,$newborders,$arr) != null) {
-                            $Ledge = $this->addEdge($B,$A,$b,$keybord,$tmpborder,$newborders,$arr);
-                            echo "L=B-b<br>";
-                        }elseif($this->addEdge($A,$B,$b,$keybord,$tmpborder,$newborders,$arr) != null) {
-                                $Ledge = $this->addEdge($A,$B,$b,$keybord,$tmpborder,$newborders,$arr);
-                                echo "L=A-b<br>";
-                            }elseif ($this->addEdge($B,$A,$a,$keybord,$tmpborder,$newborders,$arr) != null) {
-                                    $Ledge = $this->addEdge($B,$A,$a,$keybord,$tmpborder,$newborders,$arr);
-                                    echo "L=B-a<br>";
-                                }else
+                    $tmp = null;
+                    if(($tmp=$this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr))==null) {
+                        if(($tmp = $this->addEdge($B,$A,$b,$keybord,$tmpborder,$newborders,$arr)) == null) {
+                            if(($tmp = $this->addEdge($A,$B,$b,$keybord,$tmpborder,$newborders,$arr)) == null) {
+                                if (($tmp = $this->addEdge($B,$A,$a,$keybord,$tmpborder,$newborders,$arr)) == null) {
                                     $arr = $this->cash($keybord,$tmpborder,$arr);
+                                }else echo "L=B-a<br>";
+                            }else echo "L=A-b<br>";
+                        }else echo "L=B-b<br>";
+
+                    }else echo "L=A-a<br>";
+                    if($tmp!=null)$Ledge=$tmp;
                 } elseif ($tmpborder->checkParaler($Redge)) {
-                        if($this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr)!=null) {
-                            $Redge=$this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr);
-                            echo "R=A-a<br>";
-                        }elseif($this->addEdge($B,$A, $b,$keybord,$tmpborder,$newborders,$arr) != null) {
-                                $Redge = $this->addEdge($B,$A, $b,$keybord,$tmpborder,$newborders,$arr);
-                                echo "R=B-b<br>";
-                            }elseif($this->addEdge($A,$B, $b,$keybord,$tmpborder,$newborders,$arr) != null) {
-                                    $Redge = $this->addEdge($A,$B, $b,$keybord,$tmpborder,$newborders,$arr);
-                                    echo "R=A-b<br>";
-                                }elseif ($this->addEdge($B,$A, $a,$keybord,$tmpborder,$newborders,$arr) != null) {
-                                        $Redge = $this->addEdge($B,$A, $a,$keybord,$tmpborder,$newborders,$arr);
-                                        echo "R=B-a<br>";
-                                    }else $arr = $this->cash($keybord,$tmpborder,$arr);
-                    }else{
-                        $arr = $this->cash($keybord,$tmpborder,$arr);
-                    }
+                    $tmp = null;
+                    if(($tmp=$this->addEdge($A,$B,$a,$keybord,$tmpborder,$newborders,$arr))==null) {
+                        if(($tmp = $this->addEdge($B,$A, $b,$keybord,$tmpborder,$newborders,$arr)) == null) {
+                            if(($tmp = $this->addEdge($A,$B, $b,$keybord,$tmpborder,$newborders,$arr)) == null) {
+                                if (($tmp = $this->addEdge($B,$A, $a,$keybord,$tmpborder,$newborders,$arr)) == null) {
+                                    $arr = $this->cash($keybord,$tmpborder,$arr);
+                                }else echo "R=B-a<br>";
+                            }else echo "R=A-b<br>";
+                        }else echo "R=B-b<br>";
+                    }else echo "R=A-a<br>";
+                    if($tmp!=null)$Redge=$tmp;
+                }else{
+                    $arr = $this->cash($keybord,$tmpborder,$arr);
+                }
                 echo "A:".$A->getId()."; B:".$B->getId()."; a:".$a->getId()."; b:".$b->getId()."<br>";//$a->x."-".$a->y.":".$b->x."-".$b->y."<br>";
                 echo "-------------------------------------------------------------------<br>";
             }else{
                 //    echo "...............................<br>";
                 unset($this->edges[$keybord]);
             }
-            //$this->edges = $newborders;
         }
+        $this->edges = $newborders;
         echo "<pre>";
         print_r($newborders);
         echo "</pre>";
