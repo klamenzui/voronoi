@@ -51,7 +51,7 @@ for ($i=0; $i < $bbox['countPoint']; ) {
 }
 
 $voronoi = new Voronoi(1,$bbox);
-$diagram = $voronoi->Diagram($bbox);
+$diagram = $voronoi->Diagram();
 ?>
 <?php
 /*$j = 0;
