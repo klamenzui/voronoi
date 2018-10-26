@@ -47,18 +47,23 @@ class Edge
     }
     public function newEdge($point, $value, $AB,$numbers){
         $arr=[];
-            for($i=0;$i<2;$i++){
-                //echo "-".$numbers[$i]."<br>";
-                $lA = PointChunk::length($point, $point->edges[$numbers[$i]]->A);
-                $lB = PointChunk::length($point, $point->edges[$numbers[$i]]->B);
-                //echo "-".$lA.":".$lB."<br>";.$point->getId().":".$AB[$i]->getId().", number:".$numbers[$i];
-                $edgeP = ($lA > $lB)?new Edge($AB[$i],$point->edges[$numbers[$i]]->B):new Edge($AB[$i],$point->edges[$numbers[$i]]->A);
-                $edgeV =(!empty($value->edges[$numbers[$i]]))?
-                     ($lA < $lB)?new Edge($AB[$i],$value->edges[$numbers[$i]]->B):new Edge($AB[$i],$value->edges[$numbers[$i]]->A):
-                     $edgeV = ($lA < $lB)?new Edge($AB[$i],$point->edges[$numbers[$i]]->B):new Edge($AB[$i],$point->edges[$numbers[$i]]->A);
-                $point->edges[$edgeP->getId()] = $edgeP;$arr[]=$edgeP->getId();
-                $value->edges[$edgeV->getId()] = $edgeV;$arr[]=$edgeV->getId();
-            }
+        for($i=0;$i<2;$i++){
+            //echo "-".$numbers[$i]."<br>";
+            $lA = PointChunk::length($point, $point->edges[$numbers[$i]]->A);
+            $lB = PointChunk::length($point, $point->edges[$numbers[$i]]->B);
+            //echo "-".$lA.":".$lB."<br>";.$point->getId().":".$AB[$i]->getId().", number:".$numbers[$i];
+            $edgeP = ($lA > $lB)?new Edge($AB[$i],$point->edges[$numbers[$i]]->B):new Edge($AB[$i],$point->edges[$numbers[$i]]->A);
+            $edgeV =(!empty($value->edges[$numbers[$i]]))?
+                 ($lA < $lB)?new Edge($AB[$i],$value->edges[$numbers[$i]]->B):new Edge($AB[$i],$value->edges[$numbers[$i]]->A):
+                 $edgeV = ($lA < $lB)?new Edge($AB[$i],$point->edges[$numbers[$i]]->B):new Edge($AB[$i],$point->edges[$numbers[$i]]->A);
+            $point->edges[$edgeP->getId()] = $edgeP;$arr[]=$edgeP->getId();
+            $value->edges[$edgeV->getId()] = $edgeV;$arr[]=$edgeV->getId();
+        }
+        if(($point->getId()."|".$value->getId())=="150-0|150-300") {
+            echo "<pre>";
+            print_r($arr);
+            echo "</pre>";
+        }
         return $arr;
     }
     public function checkParaler($edge){

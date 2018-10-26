@@ -37,15 +37,17 @@
             $A = new Point(999999,999999,null,false);$keyLA = 0;
             $B = new Point(999999,999999,null,false);$keyLB = 0;
             foreach ($point->edges as $k => $val) {
-                $tmp = Edge::overlaps($val, $line);/*
-                if($midpoint->getId()=="75-225"&&$k=="75-75|300-300"){
+                $tmp = Edge::overlaps($val, $line);
+                if($midpoint->getId()=="150-150"&&$k=="450-0|600-150"){
 
                     echo  "<pre>";
+                    echo $val->coefficient."<br>";
+                    echo $val->shift."<br>";
                     echo $line->coefficient."<br>";
                     echo $line->shift."<br>";
                     print_r($tmp);
                     echo "</pre>";
-                }*/
+                }
                 //if ($tmp != null)echo "tmp!=null--".$tmp->getId()."<br>";
                 if ($tmp != null && $tmp->IsPointInsidePolygon($this->bbox['borders'])) {
                     //if(($point->getId()."|".$value->getId())=="150-0|450-0") {echo $val->getId()." :-: ".(Point::length($A, $midpoint).":".Point::length($tmp, $midpoint)."<br>");}
@@ -68,12 +70,7 @@
             //echo $midpoint->getId()."<br>A:".$A->x.":".$A->y."<br>";
             //echo "B:".$B->x.":".$B->y."<br>";
             //echo "LA:".$keyLA." : ".$keyLB."<br>Edge:<br>";
-            //$point->edges[] = new Edge()
-            //unset($point->edges[$keyLA]);
             $idEdges=Edge::newEdge($point, $value, [$A,$B], [$keyLA,$keyLB]);
-            /*$VA=Edge::newEdge(, $A, $keyLA);
-            $PB=Edge::newEdge($point, $B, $keyLB);
-            $VB=Edge::newEdge($value, $B, $keyLB);*/
             $value->edges[$A->getId()."|".$B->getId()]=$point->edges[$A->getId()."|".$B->getId()] = new Edge($A, $B);
             //foreach ($idEdges as $key=>$item){
                 //echo $key.":{".$item."}<br>";
@@ -81,14 +78,11 @@
             //echo "AB:{".$A->getId()."|".$B->getId()."}<br>";
            // echo "---------------------------------------------------------<br><br>";
             //echo $point->getId()."|".$value->getId();
-            /*if(($point->getId()."|".$value->getId())=="150-0|450-0") {
+            if(($point->getId()."|".$value->getId())=="150-0|150-300") {
                 echo $point->edges[$A->getId()."|".$B->getId()]->getId()."pro<br>".$midpoint->getId()."<br>";
-                print_r($line);
             }
             /*if(strnatcmp($point->getId(),"150-0")!=0) {
-                echo "<pre>";
                     print_r($point->edges);
-                echo "</pre>";
             }*/
             ksort($point->edges);
             ksort($value->edges);
@@ -104,7 +98,7 @@
                     $midpoint = PointChunk::midpoint($point,$value);
 
                     $line->perpendicular($midpoint);
-                    /*if($point->getId()=="0-150"){
+                    if($point->getId()=="150-0"){
 
                         //echo  "<pre>";
                         echo $line->coefficient."<br>";
@@ -133,16 +127,6 @@
         }
 
         public function Diagram() { //Диаграмма
-            /*$width=$bbox->width;
-            $height=$bbox->height;
-            $dist1=$dist0=$j=0;
-            $width1=$width-2;
-            $height1=$height-2;
-            context.fillStyle="white";
-            context.fillRect(0,0,width,height);*/
-            /*echo "<pre>";
-            print_r($this->points);
-            echo "</pre><br>--------------------------------------------------------";*/
             ksort($this->points);
             /*echo "<pre>";
             print_r($this->points);
@@ -158,26 +142,5 @@
                 }
                 echo "</p>";
             }
-            //print_r($this->points);
-            /*for ($y=0; $y<$height; $y++) {
-                for ($x=0; $x<$width; $x++) {
-                    //console.log(checkArea([x,y],bbox));
-                    $tmp = new Point($x,$y,null,false);
-                    if($tmp->IsPointInsidePolygon($bbox->borders)){
-                        $dist0=$this->Metric($height);
-                        $j = -1;
-                        for ($i=0; $i<count($sites); $i++) {
-                            $dist1 = $this->Metric(new Nurbs_Point($sites[$i][0]-$x,$sites[$i][1]-$y,null,false));
-                            if ($dist1 < $dist0) { $dist0=$dist1; $j=$i; }
-                        }
-                        //context.fillStyle=C[j];
-                        //context.fillRect(x,y,1,1);
-                    }
-                }
-            }
-            //context.fillStyle="black";
-            /*for (var i=0; i<numPoints; i++) {
-                    context.fillRect (X[i], Y[i], 3, 3);
-                }*/
         }
     }

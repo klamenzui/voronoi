@@ -110,7 +110,7 @@ class PointChunk
     public function closeEdge()
     {
         echo "<pre>";
-            print_r($this->edges);
+            //print_r($this->edges);
         echo "</pre>";
         $keybord = key($this->edges);
         $tmpborder = $this->edges[$keybord];
@@ -124,7 +124,7 @@ class PointChunk
         $B = $tmpborder->getB();
         $b = $tmpborder->getB();
         $arr = [];
-        echo($this->getId() . "<br>");
+        //echo($this->getId() . "<br>");
         //echo $a->getId() . "--" . $b->getId() . "=";
         //echo (!$a->checkpoint($b)) ? "true" : "false";
         while (!$a->checkpoint($b) || count($newborders) < 2) {
@@ -169,11 +169,11 @@ class PointChunk
                             if(($tmp = $this->addEdge($A,$B,$b,$keybord,$tmpborder,$newborders,$arr)) == null) {
                                 if (($tmp = $this->addEdge($B,$A,$a,$keybord,$tmpborder,$newborders,$arr)) == null) {
                                     $arr = $this->cash($keybord,$tmpborder,$arr);
-                                }else echo "L=B-a<br>";
-                            }else echo "L=A-b<br>";
-                        }else echo "L=B-b<br>";
+                                }//else echo "L=B-a<br>";
+                            }//else echo "L=A-b<br>";
+                        }//else echo "L=B-b<br>";
 
-                    }else echo "L=A-a<br>";
+                    }//else echo "L=A-a<br>";
                     if($tmp!=null)$Ledge=$tmp;
                 } elseif ($tmpborder->checkParaler($Redge)) {
                     $tmp = null;
@@ -182,16 +182,16 @@ class PointChunk
                             if(($tmp = $this->addEdge($A,$B, $b,$keybord,$tmpborder,$newborders,$arr)) == null) {
                                 if (($tmp = $this->addEdge($B,$A, $a,$keybord,$tmpborder,$newborders,$arr)) == null) {
                                     $arr = $this->cash($keybord,$tmpborder,$arr);
-                                }else echo "R=B-a<br>";
-                            }else echo "R=A-b<br>";
-                        }else echo "R=B-b<br>";
-                    }else echo "R=A-a<br>";
+                                }//else echo "R=B-a<br>";
+                            }//else echo "R=A-b<br>";
+                        }//else echo "R=B-b<br>";
+                    }//else echo "R=A-a<br>";
                     if($tmp!=null)$Redge=$tmp;
                 }else{
                     $arr = $this->cash($keybord,$tmpborder,$arr);
                 }
-                echo "A:".$A->getId()."; B:".$B->getId()."; a:".$a->getId()."; b:".$b->getId()."<br>";//$a->x."-".$a->y.":".$b->x."-".$b->y."<br>";
-                echo "-------------------------------------------------------------------<br>";
+                //echo "A:".$A->getId()."; B:".$B->getId()."; a:".$a->getId()."; b:".$b->getId()."<br>";//$a->x."-".$a->y.":".$b->x."-".$b->y."<br>";
+                //echo "-------------------------------------------------------------------<br>";
             }else{
                 //    echo "...............................<br>";
                 unset($this->edges[$keybord]);
@@ -199,7 +199,7 @@ class PointChunk
         }
         $this->edges = $newborders;
         echo "<pre>";
-        print_r($newborders);
+        //print_r($newborders);
         echo "</pre>";
     }
 
@@ -209,7 +209,7 @@ class PointChunk
             $newborders[$keybord] = $tmpborder;
             unset($this->edges[$keybord]);
             $endTurn = $endEdge;//$tmpborder->getA();
-            echo $endTurn->getId();
+            //echo $endTurn->getId();
             //$Ledge = $tmpborder;
             foreach ($arr as $key => $el) {
                 $this->edges[$key] = $el;
@@ -220,7 +220,7 @@ class PointChunk
         return null;
     }
     private function cash($keybord,$tmpborder,$arr){
-        echo "arr++;<br>";
+        //echo "arr++;<br>";
         $arr[$keybord] = $tmpborder;
         unset($this->edges[$keybord]);
         return $arr;
