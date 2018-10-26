@@ -132,7 +132,7 @@
             $point->closeEdge();
         }
 
-        public function Diagram($bbox) { //Диаграмма
+        public function Diagram() { //Диаграмма
             /*$width=$bbox->width;
             $height=$bbox->height;
             $dist1=$dist0=$j=0;

@@ -72,17 +72,16 @@ class PointChunk
 
     public function IsPointInsidePolygon($bords)
     {
-        //i1, i2, n, N, S, S1, S2, S3, flag;
+        $flag=0;//i1, i2, n, N, S, S1, S2, S3,
         //echo "---------------------------------------<br>";
         $N = count($bords);
         for ($n = 0; $n < $N; $n++) {
-            $flag = 0;
             $i1 = $n < $N - 1 ? $n + 1 : 0;
             while ($flag == 0) {
                 $i2 = $i1 + 1;
                 if ($i2 >= $N)
                     $i2 = 0;
-                if ($i2 == ($n < $N - 1 ? n + 1 : 0))
+                if ($i2 == ($n < $N - 1 ? $n + 1 : 0))
                     break;
                 $S = abs($bords[$i1]->x * ($bords[$i2]->y - $bords[$n]->y) + $bords[$i2]->x * ($bords[$n]->y - $bords[$i1]->y) + $bords[$n]->x * ($bords[$i1]->y - $bords[$i2]->y));
                 $S1 = abs($bords[$i1]->x * ($bords[$i2]->y - $this->y) + $bords[$i2]->x * ($this->y - $bords[$i1]->y) + $this->x * ($bords[$i1]->y - $bords[$i2]->y));

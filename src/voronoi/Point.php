@@ -18,7 +18,6 @@ class Point
             $radius = [(((rand(0,999999)/1000000)* ($width*0.4 - 0)) + 0), (((rand(0,999999)/1000000)* ($height * 0.5 - 0)) + 0)];
             $this->x = round($radius[0] * cos($angle)) + $width/2;
             $this->y = round($radius[1] * sin($angle)) + $height/2;
-            $this->edges = [];
             if($length != null){
                 $radius = [$width-($width/1.7), $height-($height/2), $length-($length/2)];
                 $this->z = round(rand(0, $length) + $radius[3] *sin($angle))+ $length/2;
@@ -43,17 +42,17 @@ class Point
     {
         //i1, i2, n, N, S, S1, S2, S3, flag;
         //echo "---------------------------------------<br>";
+        $flag = 0;
         $N = count($bords);
         for ($n=0; $n<$N; $n++)
         {
-            $flag = 0;
             $i1 = $n < $N-1 ? $n + 1 : 0;
             while ($flag == 0)
             {
                 $i2 = $i1 + 1;
                 if ($i2 >= $N)
                     $i2 = 0;
-                if ($i2 == ($n < $N-1 ? n + 1 : 0))
+                if ($i2 == ($n < $N-1 ? $n + 1 : 0))
                     break;
                 $S = abs ($bords[$i1]->x * ($bords[$i2]->y - $bords[$n ]->y) + $bords[$i2]->x * ($bords[$n ]->y - $bords[$i1]->y) + $bords[$n]->x  * ($bords[$i1]->y - $bords[$i2]->y));
                 $S1 = abs ($bords[$i1]->x * ($bords[$i2]->y - $this->y) + $bords[$i2]->x * ($this->y - $bords[$i1]->y) + $this->x * ($bords[$i1]->y - $bords[$i2]->y));
