@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Deik
- * Date: 23.10.2018
- * Time: 21:18
- */
+
 require_once '../src/voronoi/Voronoi.php';
 require_once '../src/voronoi/PointChunk.php';
 ?>
